@@ -2,6 +2,9 @@
 <% var i; for(i=0; i< quizes.length;i++){ %>
   <tr>
   <td>
+    <label> Tematica: <%= quizes[i].tema %> </label>
+  </td>
+  <td>
     <a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %> </a>
   </td>
   <td>
