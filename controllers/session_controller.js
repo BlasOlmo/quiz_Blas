@@ -8,7 +8,7 @@ exports.loginRequerided = function (req, res, next){
 exports.new = function(req,res){
   var errors = req.session.errors || {};
   req.session.errors={};
-  res.render ('sessions/new.ejs', {errors:errors});
+  res.render ('sessions/new.ejs', {sesion:"normal",errors:errors});
 };
  exports.create = function(req,res){
    var login = req.body.login;
@@ -20,7 +20,8 @@ exports.new = function(req,res){
        res.redirect("/login");
        return;
      }
-     req.session.user ={id:user.id, username: user.username};
+     fecha = new Date();
+     req.session.user ={id:user.id, username: user.username,fecha:fecha.getTime()};
      res.redirect(req.session.redir.toString());
    });
  };

@@ -32,8 +32,22 @@ app.use(function(req,res,next){
     }
     res.locals.session = req.session;
     next();
+});
+app.use(function(req,res,next){
+  if(res.locals.session.user){
+    var ahora = new Date();
+    var inicio =res.locals.session.user.fecha;
+    var diferencia =parseInt((ahora-inicio)/1000);
+    console.log("Tiempo: "+ diferencia);
+    if (diferencia> 120){
+      console.log("Saliendo Tiempo: "+ diferencia);
+        delete req.session.user;
+        var errors = req.session.errors || {};
+        res.render ('sessions/new.ejs', {session:"expirada",errors:errors});
+    }
+  }
+  next();
 })
-
 app.use('/', routes);
 //app.use('/users', users);
 
