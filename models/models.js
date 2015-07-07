@@ -29,7 +29,7 @@ Comment.belongsTo(Quiz);
 Quiz.hasMany(Comment);
 exports.Quiz =Quiz;
 exports.Comment = Comment;
-
+exports.Sequelize =sequelize;
 sequelize.sync().success(function(){
   Quiz.count().success(function(count){
     if (count===0){

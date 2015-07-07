@@ -9,7 +9,6 @@ exports.load =function(req,res,next ,quizId){
     function(quiz){
       if(quiz){
         req.quiz =quiz;
-        console.log("datos" + JSON.stringify(quiz));
         next();
       } else { next(new Error('No existe quizId=' + quizId));}
     }
@@ -20,8 +19,6 @@ exports.load =function(req,res,next ,quizId){
 exports.index = function(req,res){
   if (req.query.search!= null){
     var search =("%" + req.query.search + "%").replace(/\s/g,"%");
-
-    console.log(search);
     models.Quiz.findAll({where:["pregunta like?",search]}).then(function(quizes){
       res.render('quizes/index.ejs', {quizes:quizes, errors:[]});
     }).catch(function(error){ next(error);});

@@ -18,8 +18,10 @@
       <header class="main" id="h1">
         <%if(!session.user){%>
           <span class="right"><a href="/login">login</a></span>
+
         <%} else {%>
-          <span class="right"> <%session.user.username%> <a href="/logout">logout</a></span>
+          <span class="right"> <%session.user.username%> &nbsp<a href="/logout">logout</a>&nbsp</span>
+          <span class="right">&nbsp<a href="/quizes/statistics">estadisticas</a>&nbsp</span>
         <%}%>
         <h2> Quiz: el juego de las preguntas </h2>
       </header>
@@ -43,5 +45,6 @@
         <p><a href="http://es.wikipedia.org/wiki/Quiz">¿Que es un Quiz?</a></p>
         <p><a href="https://github.com/BlasOlmo/quiz_Blas">Mi página en GitHub </a></p>
       </footer>
+    </div>
   </body>
 </html>
