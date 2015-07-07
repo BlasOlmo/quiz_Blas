@@ -8,8 +8,6 @@ exports.show = function(req,res){
     preguntas_sin_coment:"--",
     preguntas_con_coment:"--",
     };
-
-
   models.Quiz.count().then(function(preguntas){
       statistics.numero_preguntas = preguntas;
       models.Comment.count().then(function(comentarios) {
@@ -19,13 +17,12 @@ exports.show = function(req,res){
         } else {
           statistics.media_comentarios=0;
         }
-        models.Sequelize.query('SELECT count(*) AS n FROM "Quizzes" WHERE "id" IN (SELECT DISTINCT "quizId" FROM "Comments")').then(function(cuenta_con){
+        models.Sequelize.query('SELECT count(*) AS n FROM "Quizzes" WHERE "id" IN (SELECT DISTINCT "QuizId" FROM "Comments")').then(function(cuenta_con){
             statistics.preguntas_con_coment = cuenta_con[0].n;
-            models.Sequelize.query('SELECT count(*) AS n FROM "Quizzes" WHERE "id" not IN (SELECT DISTINCT "quizId" FROM "Comments")').then(function(cuenta_sin){
+            models.Sequelize.query('SELECT count(*) AS n FROM "Quizzes" WHERE "id" not IN (SELECT DISTINCT "QuizId" FROM "Comments")').then(function(cuenta_sin){
               statistics.preguntas_sin_coment = cuenta_sin[0].n;
               res.render('statistics/show', {statistics:statistics, errors:[]});
             });
-
         });
       });
   });
